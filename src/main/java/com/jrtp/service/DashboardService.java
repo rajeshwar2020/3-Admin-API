@@ -38,12 +38,12 @@ public class DashboardService {
         List<Order> orderList = orderRepo.findAll();
 
         double totalAmount = orderList.stream()
-                .filter(order -> "PAID".equalsIgnoreCase(order.getOrderStatus()))
+                .filter(order -> "created".equalsIgnoreCase(order.getOrderStatus()))
                 .mapToDouble(Order::getTotalPrice)
                 .sum();
 
         long totalOrderCount = orderList.stream()
-                .filter(order -> "PAID".equalsIgnoreCase(order.getOrderStatus()))
+                .filter(order -> "created".equalsIgnoreCase(order.getOrderStatus()))
                 .count();
 
         dashboardDTO.setAmountCollected(totalAmount);
