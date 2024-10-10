@@ -27,42 +27,12 @@ public class DashboardService {
     public DashboardDTO fetchDashboardValues() {
         DashboardDTO dashboardDTO = new DashboardDTO();
 
-        populateOrderMetrics(dashboardDTO);
-        populateCustomerCount(dashboardDTO);
-        populateProductMetrics(dashboardDTO);
+        dashboardDTO.setProductCount(productRepo.count());
+        dashboardDTO.setCustomersCount(customerRepo.count());
+        dashboardDTO.setAmountCollected(orderRepo.findTotalAmount());
+        dashboardDTO.setOrdersCount(orderRepo.count());
 
         return dashboardDTO;
-    }
-
-    private void populateOrderMetrics(DashboardDTO dashboardDTO) {
-        List<Order> orderList = orderRepo.findAll();
-
-        double totalAmount = orderList.stream()
-                .filter(order -> "created".equalsIgnoreCase(order.getOrderStatus()))
-                .mapToDouble(Order::getTotalPrice)
-                .sum();
-
-        long totalOrderCount = orderList.stream()
-                .filter(order -> "created".equalsIgnoreCase(order.getOrderStatus()))
-                .count();
-
-        dashboardDTO.setAmountCollected(totalAmount);
-        dashboardDTO.setOrdersCount(totalOrderCount);
-    }
-
-
-    private void populateCustomerCount(DashboardDTO dashboardDTO) {
-        long totalCustomerCount = customerRepo.count();
-        dashboardDTO.setCustomersCount(totalCustomerCount);
-    }
-
-    private void populateProductMetrics(DashboardDTO dashboardDTO) {
-        List<Product> productList = productRepo.findAll();
-
-        long productCountInStock = productList.stream()
-                .filter(product -> product.getUnitsInStock() > 0)
-                .count();
-        dashboardDTO.setProductCount(productCountInStock);
     }
 
 }
