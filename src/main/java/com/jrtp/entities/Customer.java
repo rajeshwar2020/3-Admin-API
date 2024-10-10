@@ -2,6 +2,10 @@ package com.jrtp.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -24,4 +28,12 @@ public class Customer {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @CreationTimestamp
+    @Column(name = "CREATED_DATE", updatable = false)
+    private LocalDate createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "UPDATED_DATE")
+    private LocalDate updatedDate;
 }

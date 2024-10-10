@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: 3-Admin-API
+    name: 4-Admin-API
 
   # Datasource properties
   datasource:

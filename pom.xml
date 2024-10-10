@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jrtp</groupId>
-	<artifactId>3-Admin-API</artifactId>
+	<artifactId>4-Admin-API</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>3-Admin-API</name>
+	<name>4-Admin-API</name>
 	<description>Project for Admin Dashboard</description>
 	<url/>
 	<licenses>
